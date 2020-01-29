@@ -17,7 +17,7 @@ import itertools
 import shutil
 import matplotlib.pyplot as plt
 from PIL import Image
-%matplotlib inline
+# %matplotlib inline
 
 img = Image.open('test_image.jpg')
 # plt.imshow(img)
