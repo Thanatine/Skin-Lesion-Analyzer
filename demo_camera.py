@@ -64,7 +64,7 @@ for frame1 in camera.capture_continuous(rawCapture, format="bgr",use_video_port=
                 (30, 50),
                 font,
                 1,
-                (255, 0, 0),
+                (255, 255, 255),
                 2,
                 cv2.LINE_AA)
     cv2.putText(frame,
@@ -72,20 +72,21 @@ for frame1 in camera.capture_continuous(rawCapture, format="bgr",use_video_port=
                 (30, 80),
                 font,
                 1,
-                (255, 0, 0),
+                (255, 255, 255),
                 2,
                 cv2.LINE_AA)    
 
     
     # draw hitbox
     if time.time() - infer_timestamp > 2:
-        cv2.rectangle(frame, (IM_WIDTH // 2 - BOX_WIDTH, IM_HEIGHT // 2 - BOX_HEIGHT), (IM_WIDTH // 2 + BOX_WIDTH, IM_HEIGHT // 2 + BOX_HEIGHT), (0, 255, 0), 2)
+        cv2.rectangle(frame, (IM_WIDTH // 2 - BOX_WIDTH, IM_HEIGHT // 2 - BOX_HEIGHT), (IM_WIDTH // 2 + BOX_WIDTH, IM_HEIGHT // 2 + BOX_HEIGHT), (255, 0, 0), 2)
     else:
-        cv2.rectangle(frame, (IM_WIDTH // 2 - BOX_WIDTH, IM_HEIGHT // 2 - BOX_HEIGHT), (IM_WIDTH // 2 + BOX_WIDTH, IM_HEIGHT // 2 + BOX_HEIGHT), (0, 0, 255), 4)
         if prediction_success_flag:
             cv2.putText(frame, 'Check detected photo.', (30, 150), font, 0.7, (255,255,255), 2, cv2.LINE_AA)
+            cv2.rectangle(frame, (IM_WIDTH // 2 - BOX_WIDTH, IM_HEIGHT // 2 - BOX_HEIGHT), (IM_WIDTH // 2 + BOX_WIDTH, IM_HEIGHT // 2 + BOX_HEIGHT), (0, 255, 0), 4)
         else:
             cv2.putText(frame, 'Nothing detected. Try again.', (30, 150), font, 0.7, (255,255,255), 2, cv2.LINE_AA)
+            cv2.rectangle(frame, (IM_WIDTH // 2 - BOX_WIDTH, IM_HEIGHT // 2 - BOX_HEIGHT), (IM_WIDTH // 2 + BOX_WIDTH, IM_HEIGHT // 2 + BOX_HEIGHT), (0, 0, 255), 4)
             
     key_event = cv2.waitKey(1)
     if key_event == ord('k'):
